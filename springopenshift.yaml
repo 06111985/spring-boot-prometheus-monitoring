@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: php55
+  labels:
+    app: php56
+  annotations:
+    pipeline.alpha.openshift.io/uses: '[{"name": "php56", "namespace": "", "kind": "DeploymentConfig"}]'
+spec:
+  triggers:
+  - type: GitHub
+    github:
+      secret: a04aabf8d0002f77
+  runPolicy: Serial
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+         node {
+           stage('buildImage'){
+             openshiftBuild(buildConfig: 'php56', showBuildLogs: 'true')
+           }
+           stage('deployApplication'){
+             openshiftDeploy(deploymentConfig: 'php56')
+           }
+         }
