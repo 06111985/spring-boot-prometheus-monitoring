@@ -11,6 +11,17 @@ spec:
   - type: GitHub
     github:
       secret: a04aabf8d0002f77
+   resources:
+        limits:
+          cpu: 500m
+          memory: 2Gi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      volumeMounts:
+        - name: default-token-2lhkq
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
   runPolicy: Serial
   strategy:
     type: JenkinsPipeline
