@@ -11,13 +11,13 @@ spec:
   - type: GitHub
     github:
       secret: a04aabf8d0002f77
-   resources:
-        limits:
-          cpu: 500m
-          memory: 2Gi
-        requests:
-          cpu: 100m
-          memory: 100Mi
+  resources:
+    limits:
+      cpu: 80m
+      memory: 512Mi
+    requests:
+      cpu: 70m
+      memory: 256Mi
       volumeMounts:
         - name: default-token-2lhkq
           readOnly: true
